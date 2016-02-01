@@ -61,7 +61,19 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(getClass().getName(), "onTextMessage " + s);
 
                     TextView text = (TextView)findViewById(R.id.text);
-                    text.setText(s);
+//                    text.setText(s);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(s);
+                        String jsonrpc = jsonObject.getString("jsonrpc");
+                        if(jsonObject.has("method")){
+                            String method = jsonObject.getString("method");
+                            text.setText(String.format("jsonrpc %s, method %s", jsonrpc, method));
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
 //                    JsonReader jsonReader = new JsonReader(new StringReader(s));
 //
