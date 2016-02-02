@@ -19,7 +19,7 @@ public class ListViewTestActivity extends AppCompatActivity {
         super.onResume();
 
         ListView listView = (ListView) findViewById(R.id.testListView);
-        listView.setAdapter(new ArrayAdapter<>(this, R.layout.contact_item, new Contact[]{
+        listView.setAdapter(new ContactsAdapter(this, new Contact[]{
                 new Contact("Pavel", "Y'v got my email"),
                 new Contact("Sasha", "My brother is bitch")
         }));
