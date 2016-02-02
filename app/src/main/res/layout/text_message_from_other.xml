@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:maxHeight="24dp"
+        android:src="@drawable/contact"
+        android:layout_margin="4dp"
+        android:id="@+id/user_avatar" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/message_9patch"
+        android:scaleType="fitXY"
+        android:src="@drawable/a9p_09_11_00774" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Simple Text"/>
+
+</LinearLayout>

@@ -1,9 +1,13 @@
 package ru.venusgames.deadmicrophone;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.JsonReader;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -25,8 +29,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final Context context = this;
+
+        Button button = (Button) findViewById(R.id.startLIstViewTest);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, ListViewTestActivity.class));
+            }
+        });
+
         Log.d(getClass().getName(), "onCreate");
 
+        /*
         try {
             webSocketConnection.connect("ws://invizer1.cloudapp.net:8888/ws", new WebSocket.ConnectionHandler() {
                 @Override
@@ -61,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(getClass().getName(), "onTextMessage " + s);
 
                     TextView text = (TextView)findViewById(R.id.text);
-//                    text.setText(s);
 
                     try {
                         JSONObject jsonObject = new JSONObject(s);
@@ -74,37 +88,6 @@ public class MainActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-//                    JsonReader jsonReader = new JsonReader(new StringReader(s));
-//
-//                    try {
-//
-//                        String jsonrpc = null;
-//                        String method = null;
-//                        int id = 0;
-//
-//                        jsonReader.beginObject();
-//                        while (jsonReader.hasNext()) {
-//                            String name = jsonReader.nextName();
-//                            if ("jsonrpc".equals(name)) {
-//                                jsonrpc = jsonReader.nextString();
-//                            } else if ("method".equals(name)) {
-//                                method = jsonReader.nextString();
-//                            } else if ("id".equals(name)) {
-//                                id = jsonReader.nextInt();
-//                            }
-//                        }
-//
-//                        Log.d(getClass().getName(), jsonrpc);
-//                        Log.d(getClass().getName(), method);
-//                        Log.d(getClass().getName(), String.valueOf(id));
-//
-//                        TextView text = (TextView)findViewById(R.id.text);
-//                        text.setText(method);
-//
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
                 }
 
                 @Override
@@ -120,5 +103,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (WebSocketException e) {
             e.printStackTrace();
         }
+        */
     }
 }
