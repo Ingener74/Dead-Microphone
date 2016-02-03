@@ -29,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button buttonstartDataBaseListViewTest = (Button) findViewById(R.id.startDataBaseListViewTest);
+        buttonstartDataBaseListViewTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, DataBaseListViewTest.class));
+            }
+        });
+
         /*
         try {
             webSocketConnection.connect("ws://invizer1.cloudapp.net:8888/ws", new WebSocket.ConnectionHandler() {

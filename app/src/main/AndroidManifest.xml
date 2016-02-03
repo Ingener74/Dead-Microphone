@@ -18,7 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListViewTestActivity"></activity>
+        <activity android:name=".ListViewTestActivity" />
+        <activity
+            android:name=".DataBaseListViewTest"
+            android:label="@string/title_activity_data_base_list_view_test"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
