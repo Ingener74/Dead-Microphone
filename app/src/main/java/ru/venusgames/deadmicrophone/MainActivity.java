@@ -4,21 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.StringReader;
-
-import de.tavendo.autobahn.WebSocket;
 import de.tavendo.autobahn.WebSocketConnection;
-import de.tavendo.autobahn.WebSocketException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(context, ListViewTestActivity.class));
             }
         });
-
-        Log.d(getClass().getName(), "onCreate");
 
         /*
         try {

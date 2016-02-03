@@ -1,8 +1,7 @@
 package ru.venusgames.deadmicrophone;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 public class ListViewTestActivity extends AppCompatActivity {

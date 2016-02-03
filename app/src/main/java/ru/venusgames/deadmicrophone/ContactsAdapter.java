@@ -7,29 +7,26 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.zip.Inflater;
-
 public class ContactsAdapter extends ArrayAdapter<Contact> {
-    private final LayoutInflater inflater;
+
+    private final Context context;
 
     public ContactsAdapter(Context context, Contact[] objects) {
         super(context, R.layout.contact_item, objects);
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.context = context;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View view = convertView;
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if(view == null){
-            view = inflater.inflate(R.layout.contact_item, parent);
-        }
+        View view = inflater.inflate(R.layout.contact_item, parent, false);
 
         Contact contact = getItem(position);
 
         ((TextView)view.findViewById(R.id.contact_name)).setText(contact.name);
-        ((TextView)view.findViewById(R.id.message)).setText(contact.name);
+        ((TextView)view.findViewById(R.id.message)).setText(contact.message);
 
         return view;
     }
