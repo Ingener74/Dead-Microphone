@@ -61,6 +61,8 @@ public class DataBaseListViewTest extends AppCompatActivity implements android.s
                 EditText name = (EditText) findViewById(R.id.editTextName);
                 EditText message = (EditText) findViewById(R.id.editTextMessage);
                 database.addContact(new Contact(name.getText().toString(), message.getText().toString()));
+                name.setText("");
+                message.setText("");
                 getSupportLoaderManager().getLoader(LOADER_ID).forceLoad();
             }
         });
