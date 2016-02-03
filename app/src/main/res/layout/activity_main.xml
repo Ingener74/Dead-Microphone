@@ -33,4 +33,13 @@
         android:layout_below="@+id/startLIstViewTest"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="start database cursoradapter listview test"
+        android:id="@+id/startTest3"
+        android:layout_below="@+id/startDataBaseListViewTest"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

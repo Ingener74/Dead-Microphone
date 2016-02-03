@@ -22,6 +22,10 @@
         <activity
             android:name=".DataBaseListViewTest"
             android:label="@string/title_activity_data_base_list_view_test"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DBCursorAdapterListViewTest"
+            android:label="@string/title_activity_dbcursor_adapter_list_view_test"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
