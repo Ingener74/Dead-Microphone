@@ -7,12 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.tavendo.autobahn.WebSocketConnection;
+import de.tavendo.autobahn.WebSocketConnectionHandler;
+import de.tavendo.autobahn.WebSocketException;
 
 public class MainActivity extends AppCompatActivity {
 
     private final WebSocketConnection webSocketConnection = new WebSocketConnection();
+    private ArrayList<HashMap<String, String>> reqList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,66 +53,77 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        try {
-//            webSocketConnection.connect("ws://invizer1.cloudapp.net:8888/ws", new WebSocket.ConnectionHandler() {
-//                @Override
-//                public void onOpen() {
-//                    Log.d(getClass().getName(), "onOpen");
-//
-//                    JSONObject payload = new JSONObject();
+        Button button = (Button) findViewById(R.id.webSocketButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(webSocketConnection.isConnected()){
+                    JSONObject payload = new JSONObject();
+                    try {
+                        payload.put("jsonrpc", "2.0")
+                                .put("method", "enter")
+                                .put("id", 1)
+                                .put("params", new JSONObject().
+                                        put("phone", "+79090").
+                                        put("device_id", "test-phone"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    String s = payload.toString();
+
+                    Log.d(getClass().getName(), "payload " + s);
+
+                    webSocketConnection.sendTextMessage(s);
+                }
+            }
+        });
+
+        reqList = new ArrayList<>(1000);
+
+        try {
+//            String wsUri = "ws://invizer1.cloudapp.net:8888/ws";
+            String wsUri = "ws://136.243.156.202:8888/ws";
+
+            webSocketConnection.connect(wsUri, new WebSocketConnectionHandler(){
+                @Override
+                public void onOpen() {
+                    Log.d(getClass().getName(), "onOpen");
+                }
+
+                @Override
+                public void onTextMessage(String payload) {
+                    Log.d(getClass().getName(), "onTextMessage " + payload);
+
+//                    TextView text = (TextView)findViewById(R.id.responseTextView);
+                    ListView listView = (ListView) findViewById(R.id.reqListView);
+
+                    HashMap<String, String> stringStringHashMap = new HashMap<>();
+                    stringStringHashMap.put("text", payload);
+                    reqList.add(stringStringHashMap);
+
+                    listView.setAdapter(new SimpleAdapter(context, reqList, android.R.layout.simple_list_item_1, new String []{"text"}, new int[]{android.R.id.text1}));
+
 //                    try {
-//                        payload.put("jsonrpc", "2.0")
-//                                .put("method", "enter")
-//                                .put("id", 1)
-//                                .put("params", new JSONObject().
-//                                        put("phone", "").
-//                                        put("device_id", "test-phone"));
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                    String s = payload.toString();
-//
-//                    Log.d(getClass().getName(), "payload " + s);
-//
-//                    webSocketConnection.sendTextMessage(s);
-//                }
-//
-//                @Override
-//                public void onClose(int i, String s) {
-//                    Log.d(getClass().getName(), "onClose " + i + ", " + s);
-//                }
-//
-//                @Override
-//                public void onTextMessage(String s) {
-//                    Log.d(getClass().getName(), "onTextMessage " + s);
-//
-//                    TextView text = (TextView)findViewById(R.id.text);
-//
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(s);
+//                        JSONObject jsonObject = new JSONObject(payload);
 //                        String jsonrpc = jsonObject.getString("jsonrpc");
 //                        if(jsonObject.has("method")){
 //                            String method = jsonObject.getString("method");
-//                            text.setText(String.format("jsonrpc %s, method %s", jsonrpc, method));
+//
+//                            listView.setAdapter(new SimpleAdapter(context, reqList));
 //                        }
 //
 //                    } catch (JSONException e) {
 //                        e.printStackTrace();
 //                    }
-//                }
-//
-//                @Override
-//                public void onRawTextMessage(byte[] bytes) {
-//                    Log.d(getClass().getName(), "onRawTextMessage " + bytes.length);
-//                }
-//
-//                @Override
-//                public void onBinaryMessage(byte[] bytes) {
-//                    Log.d(getClass().getName(), "onBinaryMessage " + bytes.length);
-//                }
-//            });
-//        } catch (WebSocketException e) {
-//            e.printStackTrace();
-//        }
+                }
+
+                @Override
+                public void onClose(int code, String reason) {
+                    Log.d(getClass().getName(), "onClose " + code + ", " + reason);
+                }
+            });
+        } catch (WebSocketException e) {
+            e.printStackTrace();
+        }
     }
 }

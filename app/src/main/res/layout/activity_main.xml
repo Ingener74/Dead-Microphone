@@ -42,4 +42,24 @@
         android:layout_below="@+id/startDataBaseListViewTest"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="web socket request"
+        android:id="@+id/webSocketButton"
+        android:layout_below="@+id/startTest3"
+        android:layout_alignRight="@+id/startTest3"
+        android:layout_alignEnd="@+id/startTest3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reqListView"
+        android:layout_below="@+id/webSocketButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
